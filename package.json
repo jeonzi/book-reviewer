@@ -1,0 +1,33 @@
+{
+  "name": "book-reviewer",
+  "version": "1.0.0",
+  "description": "React.js + GraphQL project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --exec babel-node src/index.js"
+  },
+  "repository": "git+https://github.com/jeonzi/book-reviewer.git",
+  "keywords": [],
+  "author": "jeonzi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeonzi/book-reviewer/issues"
+  },
+  "homepage": "https://github.com/jeonzi/book-reviewer#readme",
+  "dependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.3",
+    "bcrypt": "^3.0.5",
+    "dotenv": "^7.0.0",
+    "graphql-tools": "^4.0.4",
+    "graphql-yoga": "^1.17.4",
+    "merge-graphql-schemas": "^1.5.8",
+    "morgan": "^1.9.1",
+    "prisma-client-lib": "^1.30.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}

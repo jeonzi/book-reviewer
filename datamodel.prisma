@@ -1,0 +1,40 @@
+scalar DateTime
+
+type User {
+  id: ID! @unique
+  username: String! @unique
+  email: String! @unique
+  password: String! 
+  books: [Book!]!
+}
+
+type Book {
+  id: ID! @unique
+  book_name: String!
+  publisher: String!
+  authors: [Author!]!
+  users: [User!]!
+  comments: [Comment!]
+  reviews: [Review!]
+}
+
+type Author {
+  id: ID! @unique
+  author_name: String!
+  books: [Book!]!
+}
+
+type Comment {
+  id: ID! @unique
+  user: User!
+  text: String! @default(value: "")
+  createdAt: DateTime!
+  page: Int!
+}
+
+type Review {
+  id: ID! @unique
+  user: User!
+  text: String! @default(value: "")
+  createdAt: DateTime!
+}
