@@ -1,7 +1,6 @@
 // graphQL 서버 OPEN
 import { GraphQLServer } from "graphql-yoga";
 import "./env";
-
 import schema from "./schema";
 import logger from "morgan";
 

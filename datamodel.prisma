@@ -8,6 +8,12 @@ type User {
   books: [Book!]!
 }
 
+type AuthData {
+  email: ID! @unique
+  token: String!
+  tokenExpiration: Int!
+}
+
 type Book {
   id: ID! @unique
   book_name: String!
