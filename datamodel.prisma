@@ -6,22 +6,27 @@ type User {
   email: String! @unique
   password: String! 
   books: [Book!]!
+  likes: [Like!]!
+  comments: [Comment!]!
 }
 
-type AuthData {
-  email: ID! @unique
-  token: String!
-  tokenExpiration: Int!
+type Like {
+  id: ID! @unique
+  user: User!
+  book: Book!
 }
 
 type Book {
   id: ID! @unique
   book_name: String!
   publisher: String!
-  authors: [Author!]!
-  users: [User!]!
-  comments: [Comment!]
-  reviews: [Review!]
+  author: Author!
+  photos: [Photo!]
+  user: User!
+  phrases: [Phrase!]
+  review: Review
+  likes: [Like!]!
+  createdAt: DateTime!
 }
 
 type Author {
@@ -30,17 +35,32 @@ type Author {
   books: [Book!]!
 }
 
-type Comment {
+type Photo {
+  id : ID! @unique
+  url : String!
+  user: User!
+}
+
+type Phrase {
   id: ID! @unique
   user: User!
   text: String! @default(value: "")
-  createdAt: DateTime!
   page: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type Review {
   id: ID! @unique
   user: User!
+  title: String
   text: String! @default(value: "")
   createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Comment {
+  id: ID! @unique
+  text: String!
+  commenter: [User!]!
 }
