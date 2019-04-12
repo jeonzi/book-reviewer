@@ -21,10 +21,11 @@ type Book {
   book_name: String!
   publisher: String!
   author: Author!
+  pubdate: DateTime!
+  description: String
   photos: [Photo!]
-  user: User!
   phrases: [Phrase!]
-  review: Review
+  review: [Review!]!
   likes: [Like!]!
   createdAt: DateTime!
 }
@@ -62,5 +63,5 @@ type Review {
 type Comment {
   id: ID!
   text: String!
-  commenter: [User]!
+  book: Book!
 }

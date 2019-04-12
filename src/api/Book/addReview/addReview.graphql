@@ -1,0 +1,3 @@
+type Mutation {
+    addReview(text: String! bookId: String!): Review!
+} 

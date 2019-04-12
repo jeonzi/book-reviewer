@@ -22,23 +22,11 @@ export default {
             }
           }
         ]
+        
       };
       console.log(filterOpts);
       try {
-        const exsitsLike = await prisma.$exists.like({
-          AND: [
-            {
-              user: {
-                id: user.id
-              }
-            },
-            {
-              book: {
-                id: bookId
-              }
-            }
-          ]
-        });
+        const exsitsLike = await prisma.$exists.like(filterOpts);
         console.log(exsitsLike);
         if (exsitsLike) {
           await prisma.deleteManyLikes(filterOpts);

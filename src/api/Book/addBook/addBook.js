@@ -9,44 +9,48 @@ export default {
       try {
         const { book_name, authorName, publisher } = args;
         const user = await prisma.user({ email: request.email });
-        console.log(user);
-        const ExistAuthor = await prisma.$exists.author({
-          author_name: args.authorName
+        // const ExistAuthor = await prisma.$exists.author({
+        //   author_name: args.authorName
+        // });
+        const ExistAuthor = await prisma.authors({
+          where: { author_name: authorName }
         });
         console.log(ExistAuthor);
-        if (!ExistAuthor) {
+        if (ExistAuthor.length === 0) {
           const book = await prisma.createBook({
             book_name,
-            user: {
-              connect: {
-                id: user.id,
-                username: user.username,
-                email: user.email
-              }
-            },
             author: { create: { author_name: args.authorName } },
             publisher
           });
           console.log(book);
-          return book.book_name;
-        } else {
-          const author = await prisma.authors({
-            where: { author_name: authorName }
-          });
-          const book = await prisma.createBook({
-            book_name,
-            author: { connect: { id: author[0].id } },
-            publisher,
-            user: {
-              connect: {
-                id: user.id,
-                username: user.username,
-                email: user.email
+
+          await prisma.updateUser({
+            where: { id: user.id },
+            data: {
+              books: {
+                connect: { id: book.id }
               }
             }
           });
+
+          return book;
+        } else {
+          const book = await prisma.createBook({
+            book_name,
+            author: { connect: { id: ExistAuthor[0].id } },
+            publisher
+          });
           console.log(book);
-          return book.book_name;
+
+          await prisma.updateUser({
+            where: { id: user.id },
+            data: {
+              books: {
+                connect: { id: book.id }
+              }
+            }
+          });
+          return book;
         }
       } catch (error) {
         console.log(error);
