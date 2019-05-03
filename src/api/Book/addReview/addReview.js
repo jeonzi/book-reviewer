@@ -16,10 +16,16 @@ export default {
       await prisma.updateBook({
         where: { id: bookId },
         data: {
-          review: { connect: { id: review.id } }
+          reviews: { connect: { id: review.id } }
         }
       });
-      return true;
+      await prisma.updateUser({
+        where: { id: user.id },
+        data: {
+          reviews: { connect: { id: reviews.id } }
+        }
+      });
+      return "review가 등록되었습니다아아아아";
     }
   }
 };

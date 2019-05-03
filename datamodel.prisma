@@ -5,8 +5,9 @@ type User {
   username: String! @unique
   email: String! @unique
   password: String! 
-  books: [Book!]!
+  books: [Book!]! @relation(name: "BookReader", onDelete: SET_NULL)
   likes: [Like!]!
+  reviews : [Review!]! @relation(name: "ReviewOnUser", onDelete: CASCADE)
   comments: [Comment!]!
 }
 
@@ -20,20 +21,23 @@ type Book {
   id: ID! @unique
   book_name: String!
   publisher: String!
-  author: Author!
+  author: Author! @relation(name: "BookWriter", onDelete: SET_NULL)
+  users: [User!]! @relation(name: "BookReader", onDelete: CASCADE)
   pubdate: DateTime! @default(value: "2019-04-12")
-  description: String! @default(value: "")
-  photos: [Photo!]
+  image: String
   phrases: [Phrase!]
-  review: [Review!]!
+  reviews: [Review!]!
   likes: [Like!]!
+  description: String! @default(value: "")
+  isbn: String
+  naver_bid: String
   createdAt: DateTime!
 }
 
 type Author {
   id: ID! @unique
   author_name: String!
-  books: [Book!]!
+  books: [Book!]! @relation(name: "BookWriter", onDelete: CASCADE)
 }
 
 type Photo {
@@ -53,8 +57,9 @@ type Phrase {
 
 type Review {
   id: ID! @unique
-  user: User!
+  user: User!  @relation(name: "ReviewOnUser", onDelete: SET_NULL)
   title: String
+  photos: [Photo!]!
   text: String! @default(value: "")
   createdAt: DateTime!
   updatedAt: DateTime!

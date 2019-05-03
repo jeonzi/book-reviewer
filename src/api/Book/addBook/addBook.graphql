@@ -1,3 +1,9 @@
+# type Mutation {
+#     addBook(ISBN: String!): Book!
+#     getBooks(bookName: String!): String!
+# }
+
 type Mutation {
-    addBook(book_name: String!, authorName: String!, publisher: String!): Book!
+    # addBook(book: String! authorName: String!): Book!
+    addBook(bookName: String!): String
 }

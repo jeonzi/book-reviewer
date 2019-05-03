@@ -7,6 +7,7 @@ type User {
   password: String! 
   books: [Book!]!
   likes: [Like!]!
+  reviews: [Review!]!
   comments: [Comment!]!
 }
 
@@ -19,13 +20,15 @@ type Like {
 type Book {
   id: ID! 
   book_name: String!
+  isbn: String
+  naver_bid: String
   publisher: String!
   author: Author!
-  pubdate: DateTime!
-  description: String
-  photos: [Photo!]
+  users: [User!]!
+  description: String!
+  image: String
   phrases: [Phrase!]
-  review: [Review!]!
+  reviews: [Review!]!
   likes: [Like!]!
   createdAt: DateTime!
 }
@@ -56,6 +59,7 @@ type Review {
   user: User!
   title: String
   text: String!
+  photos: [Photo!]!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -64,4 +68,9 @@ type Comment {
   id: ID!
   text: String!
   book: Book!
+}
+
+type BookDetail {
+  book: Book!
+
 }
